@@ -150,7 +150,7 @@ function startOver() {
 
 .heading-display {
   font-family: var(--font-family);
-  font-size: 28px;
+  font-size: clamp(2rem, 1.65rem + 0.9vw, 2.5rem);
   font-weight: 600;
   color: #1f2937;
   line-height: 1.3;
@@ -158,22 +158,23 @@ function startOver() {
 }
 
 .body-secondary {
-  font-size: 13px;
+  font-size: 15px;
   color: #6b7280;
-  margin-bottom: 24px;
+  margin-bottom: 30px;
 }
 
 .card {
   background: #ffffff;
   border: 1px solid #d1d5db;
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
 }
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 12px;
   margin-bottom: 20px;
 }
@@ -181,8 +182,8 @@ function startOver() {
 .stat-card {
   background: #f9faf9;
   border: 1px solid #d1d5db;
-  border-radius: 8px;
-  padding: 16px;
+  border-radius: 12px;
+  padding: 18px;
   text-align: center;
 }
 
@@ -224,7 +225,7 @@ function startOver() {
 }
 
 .calorie-value {
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 600;
   color: #ef4444;
   margin-bottom: 8px;
@@ -272,14 +273,14 @@ function startOver() {
 
 .start-over {
   width: 100%;
-  height: 34px;
+  height: 42px;
   padding: 0 16px;
   background: #ef4444;
   color: #ffffff;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
   margin-top: 12px;
@@ -288,6 +289,38 @@ function startOver() {
 .start-over:hover {
   background: #dc2626;
   transform: translateY(-1px);
+}
+
+@media (max-width: 900px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .body-secondary {
+    font-size: 13px;
+    margin-bottom: 22px;
+  }
+
+  .card {
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 18px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .calorie-value {
+    font-size: 30px;
+  }
+
+  .start-over {
+    height: 36px;
+    font-size: 13px;
+  }
 }
 </style>
 

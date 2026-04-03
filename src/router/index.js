@@ -3,6 +3,7 @@ import Screen1BMI from '../screens/Screen1BMI.vue'
 import Screen2Details from '../screens/Screen2Details.vue'
 import Screen3Diet from '../screens/Screen3Diet.vue'
 import Screen4Grid from '../screens/Screen4Grid.vue'
+import Screen5Summary from '../screens/Screen5Summary.vue'
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: '/meals',
     name: 'Screen4',
     component: Screen4Grid,
+  },
+  {
+    path: '/summary',
+    name: 'Screen5',
+    component: Screen5Summary,
   },
 ]
 

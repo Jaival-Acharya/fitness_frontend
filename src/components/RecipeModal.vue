@@ -70,7 +70,7 @@
           </div>
 
           <!-- Method Section -->
-          <div class="section-title">Method</div>
+          <div class="section-title">recipe</div>
           <div class="steps-list">
             <div v-for="(step, idx) in parsedSteps" :key="idx" class="step-item">
               <div class="step-number">{{ idx + 1 }}</div>
@@ -139,8 +139,9 @@ function closeModal() {
   backdrop-filter: blur(4px);
   display: flex;
   align-items: flex-end;
+  justify-content: center;
   z-index: 100;
-  padding: 0 20px 20px 20px;
+  padding: 0 20px 20px;
 }
 
 .modal-content {
@@ -333,6 +334,28 @@ function closeModal() {
 .modal-enter-from .modal-content,
 .modal-leave-to .modal-content {
   transform: translateY(100%);
+}
+
+@media (max-width: 768px) {
+  .modal-overlay {
+    align-items: flex-end;
+    justify-content: center;
+    padding: 0 16px 16px;
+  }
+
+  .modal-content {
+    border-bottom: none;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .modal-enter-from .modal-content,
+  .modal-leave-to .modal-content {
+    transform: translateY(100%);
+  }
+
+  .macros-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 </style>
 

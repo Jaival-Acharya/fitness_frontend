@@ -79,7 +79,54 @@
       </div>
     </div>
 
-    <!-- Allergies Selector -->
+    <!-- Target Weight (Conditional) -->
+    <div v-if="fitnessGoal === 'lose' || fitnessGoal === 'build'" class="card target-weight-card">
+      <label class="field-label">
+        {{ fitnessGoal === 'lose' ? '🎯 Target Weight to Lose' : '🎯 Target Weight to Gain' }}
+      </label>
+      <div class="weight-input-group">
+        <div class="weight-input">
+          <label class="small-label">From (Current)</label>
+          <input
+            type="number"
+            :value="userStore.weight"
+            disabled
+            class="input-field disabled"
+          />
+          <span class="unit">kg</span>
+        </div>
+        <div class="arrow">→</div>
+        <div class="weight-input">
+          <label class="small-label">To (Target)</label>
+          <input
+            v-model.number="targetWeight"
+            type="number"
+            step="0.1"
+            :placeholder="`e.g., ${fitnessGoal === 'lose' ? userStore.weight - 10 : userStore.weight + 10}`"
+            class="input-field"
+          />
+          <span class="unit">kg</span>
+        </div>
+      </div>
+      <div v-if="targetWeight" class="weight-delta">
+        <span v-if="fitnessGoal === 'lose'" class="delta-text">
+          You plan to lose {{ (userStore.weight - targetWeight).toFixed(1) }} kg
+        </span>
+        <span v-else class="delta-text">
+          You plan to gain {{ (targetWeight - userStore.weight).toFixed(1) }} kg
+        </span>
+      </div>
+    </div>
+
+    <!-- Current Weight Display (for Maintain) -->
+    <div v-else-if="fitnessGoal === 'maintain'" class="card maintain-card">
+      <label class="field-label">📊 Current Weight</label>
+      <div class="current-weight-display">
+        <div class="weight-value">{{ userStore.weight }}</div>
+        <div class="weight-label">kg</div>
+      </div>
+      <div class="maintain-text">You'll maintain your current weight with proper nutrition and exercise.</div>
+    </div>
     <div class="card">
       <label class="field-label">Select Allergies (Optional)</label>
       <div class="allergy-dropdown">
@@ -145,6 +192,7 @@ const heartRate = ref(userStore.heartRate || 72)
 const gender = ref('Male')
 const activity = ref('moderate')
 const fitnessGoal = ref('maintain')
+const targetWeight = ref(null)
 const selectedAllergies = ref([
   ...(userStore.allergies || []),
 ])
@@ -193,6 +241,7 @@ async function handleContinue() {
       gender: gender.value,
       activity_level: activity.value,
       fitness_goal: fitnessGoal.value,
+      target_weight: targetWeight.value,
       allergies: selectedAllergies.value,
       restrictions_text: selectedAllergies.value.join(', '),
       restrictions: selectedAllergies.value.join(', '),
@@ -204,6 +253,7 @@ async function handleContinue() {
       gender: gender.value,
       activityLevel: activity.value,
       fitnessGoal: fitnessGoal.value,
+      targetWeight: targetWeight.value,
       allergies: selectedAllergies.value,
       restrictions: selectedAllergies.value.join(', '),
     })
@@ -224,7 +274,7 @@ function goBack() {
 <style scoped>
 .heading-display {
   font-family: var(--font-family);
-  font-size: 28px;
+  font-size: clamp(2rem, 1.65rem + 0.9vw, 2.5rem);
   font-weight: 600;
   color: #111110;
   line-height: 1.3;
@@ -232,9 +282,9 @@ function goBack() {
 }
 
 .body-secondary {
-  font-size: 13px;
+  font-size: 15px;
   color: #6b6b66;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .back-top {
@@ -246,9 +296,10 @@ function goBack() {
 .card {
   background: #ffffff;
   border: 1px solid #e3e3df;
-  border-radius: 8px;
+  border-radius: 14px;
   padding: 20px;
   margin-bottom: 20px;
+  box-shadow: var(--shadow-sm);
 }
 
 .field-label {
@@ -487,11 +538,11 @@ function goBack() {
 
 .btn-primary,
 .btn-secondary {
-  height: 34px;
-  font-size: 13px;
+  height: 40px;
+  font-size: 14px;
   font-weight: 500;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -519,6 +570,159 @@ function goBack() {
 .btn-secondary:hover {
   background: #e3e3df;
   transform: translateY(-1px);
+}
+
+@media (min-width: 1025px) {
+  .card {
+    padding: 24px;
+  }
+
+  .select-cards {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .select-cards-3col {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .dropdown-menu {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .body-secondary {
+    font-size: 13px;
+  }
+
+  .select-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .select-cards-3col {
+    grid-template-columns: 1fr;
+  }
+
+  .dropdown-menu {
+    grid-template-columns: 1fr;
+  }
+
+  .button-row {
+    grid-template-columns: 1fr;
+  }
+
+  .button-spacer {
+    display: none;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    height: 36px;
+    font-size: 13px;
+  }
+}
+
+/* Target Weight Styles */
+.target-weight-card {
+  background: linear-gradient(135deg, #fef3c7 0%, #fef9e7 100%);
+  border: 1px solid #fcd34d;
+}
+
+.weight-input-group {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.weight-input {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.small-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #666;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.weight-input .input-field {
+  padding-right: 40px;
+}
+
+.weight-input .input-field.disabled {
+  background: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.unit {
+  position: absolute;
+  right: 12px;
+  bottom: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b7280;
+  pointer-events: none;
+}
+
+.arrow {
+  font-size: 20px;
+  color: #999;
+  margin-bottom: 8px;
+}
+
+.weight-delta {
+  padding: 10px 12px;
+  background: rgba(34, 197, 94, 0.1);
+  border-left: 3px solid #22c55e;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+
+.delta-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #16a34a;
+}
+
+/* Maintain Card */
+.maintain-card {
+  background: linear-gradient(135deg, #dbeafe 0%, #eff6ff 100%);
+  border: 1px solid #93c5fd;
+}
+
+.current-weight-display {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 16px 0;
+}
+
+.weight-value {
+  font-size: 36px;
+  font-weight: 700;
+  color: #0369a1;
+}
+
+.weight-label {
+  font-size: 18px;
+  font-weight: 600;
+  color: #0284c7;
+}
+
+.maintain-text {
+  font-size: 13px;
+  color: #0369a1;
+  margin-top: 12px;
+  padding: 10px;
+  background: rgba(3, 105, 161, 0.05);
+  border-radius: 6px;
 }
 </style>
 

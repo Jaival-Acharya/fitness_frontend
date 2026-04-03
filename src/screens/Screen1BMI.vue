@@ -121,7 +121,7 @@ async function handleContinue() {
 
 .heading-display {
   font-family: var(--font-family);
-  font-size: 28px;
+  font-size: clamp(2rem, 1.65rem + 0.9vw, 2.5rem);
   font-weight: 600;
   color: #1f2937;
   line-height: 1.3;
@@ -129,18 +129,19 @@ async function handleContinue() {
 }
 
 .body-secondary {
-  font-size: 13px;
+  font-size: 15px;
   color: #6b7280;
-  margin-bottom: 32px;
+  margin-bottom: 36px;
   line-height: 1.5;
 }
 
 .card {
   background: #ffffff;
   border: 1px solid #d1d5db;
-  border-radius: 8px;
-  padding: 20px;
-  margin-bottom: 20px;
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
 }
 
 .form-grid {
@@ -210,13 +211,13 @@ async function handleContinue() {
 .btn-primary {
   width: 100%;
   padding: 0 16px;
-  height: 34px;
+  height: 42px;
   background: #ef4444;
   color: #ffffff;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -234,11 +235,29 @@ async function handleContinue() {
 .error-message {
   background: #fef2f2;
   border: 1px solid #fca5a5;
-  border-radius: 4px;
+  border-radius: 8px;
   color: #ef4444;
   padding: 12px 16px;
-  margin-bottom: 20px;
-  font-size: 13px;
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .body-secondary {
+    font-size: 13px;
+    margin-bottom: 28px;
+  }
+
+  .card {
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 18px;
+  }
+
+  .btn-primary {
+    height: 36px;
+    font-size: 13px;
+  }
 }
 </style>
 

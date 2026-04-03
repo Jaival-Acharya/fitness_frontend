@@ -29,7 +29,7 @@ const percentage = computed(() => {
 <style scoped>
 .step-indicator {
   position: sticky;
-  top: 48px;
+  top: 64px;
   z-index: 40;
   height: 2px;
   background: var(--border);
@@ -40,5 +40,17 @@ const percentage = computed(() => {
   height: 100%;
   background: #ef4444;
   transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (max-width: 1024px) {
+  .step-indicator {
+    top: 56px;
+  }
+}
+
+@media (max-width: 768px) {
+  .step-indicator {
+    top: 52px;
+  }
 }
 </style>

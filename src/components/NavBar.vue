@@ -15,8 +15,8 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 24px;
-  height: 48px;
+  padding: 0 32px;
+  height: 64px;
   background: rgba(247, 247, 245, 0.92);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border);
@@ -27,7 +27,7 @@ nav {
 
 .logo {
   font-family: var(--font-family);
-  font-size: 17px;
+  font-size: 22px;
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.2px;
@@ -38,5 +38,27 @@ nav {
   font-style: italic;
   color: var(--accent);
   margin-left: 1px;
+}
+
+@media (max-width: 1024px) {
+  nav {
+    height: 56px;
+    padding: 0 24px;
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  nav {
+    height: 52px;
+    padding: 0 16px;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
 }
 </style>

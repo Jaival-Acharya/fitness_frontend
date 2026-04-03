@@ -56,9 +56,15 @@ watch(
 .main-content {
   flex: 1;
   width: 100%;
-  padding-top: 20px;
+  padding-top: 32px;
   padding-bottom: 40px;
   overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding-top: 16px;
+  }
 }
 
 .slide-forward-enter-active,

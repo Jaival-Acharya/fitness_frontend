@@ -32,13 +32,21 @@
   --bmi-obese:    #ef4444;
 
   /* Spacing */
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
   --r-sm:   6px;
   --r-md:   8px;
   --r-lg:  12px;
+  --r-xl:  16px;
 
   /* Shadow */
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-lg: 0 14px 40px rgba(0,0,0,0.11), 0 3px 12px rgba(0,0,0,0.06);
 }
 
 * {
@@ -54,10 +62,13 @@ html {
 
 body {
   font-family: var(--font-family);
-  font-size: 13px;
+  font-size: 15px;
   line-height: 1.5;
   color: var(--text-primary);
-  background: var(--bg);
+  background:
+    radial-gradient(circle at 14% 8%, rgba(239, 68, 68, 0.08), transparent 35%),
+    radial-gradient(circle at 86% 4%, rgba(59, 130, 246, 0.08), transparent 32%),
+    linear-gradient(180deg, #fbfcfe 0%, #f3f4f8 100%);
 }
 
 html, body, #app {
@@ -78,9 +89,9 @@ html, body, #app {
 /* Display headings */
 .heading-display {
   font-family: var(--font-family);
-  font-size: 28px;
+  font-size: clamp(2rem, 1.55rem + 1.1vw, 2.75rem);
   font-weight: 600;
-  letter-spacing: -0.3px;
+  letter-spacing: -0.4px;
   color: var(--text-primary);
 }
 
@@ -91,9 +102,9 @@ html, body, #app {
 
 /* Buttons */
 .btn-primary {
-  height: 34px;
-  padding: 0 16px;
-  font-size: 13px;
+  height: 40px;
+  padding: 0 20px;
+  font-size: 14px;
   font-weight: 500;
   font-family: var(--font-family);
   background: var(--accent);
@@ -101,8 +112,9 @@ html, body, #app {
   border: none;
   border-radius: var(--r-md);
   cursor: pointer;
-  transition: opacity 0.15s, transform 0.1s;
+  transition: opacity 0.15s, transform 0.12s, box-shadow 0.15s;
   letter-spacing: 0.01em;
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-primary:hover {
@@ -114,9 +126,9 @@ html, body, #app {
 }
 
 .btn-secondary {
-  height: 34px;
-  padding: 0 14px;
-  font-size: 13px;
+  height: 40px;
+  padding: 0 18px;
+  font-size: 14px;
   font-weight: 400;
   background: var(--surface);
   color: var(--text-secondary);
@@ -136,9 +148,9 @@ input[type="text"],
 input[type="number"],
 select,
 textarea {
-  height: 34px;
-  padding: 0 10px;
-  font-size: 13px;
+  height: 40px;
+  padding: 0 12px;
+  font-size: 14px;
   font-family: var(--font-family);
   background: var(--surface);
   border: 1px solid var(--border);
@@ -164,24 +176,25 @@ input[type="range"] {
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--r-lg);
-  padding: 20px;
+  border-radius: var(--r-xl);
+  padding: 24px;
   box-shadow: var(--shadow-sm);
 }
 
 /* Selection card */
 .select-card {
-  padding: 14px 16px;
+  padding: 16px 18px;
   border: 1px solid var(--border);
-  border-radius: var(--r-lg);
+  border-radius: var(--r-xl);
   background: var(--surface);
   cursor: pointer;
-  transition: border-color 0.15s, background 0.15s;
+  transition: border-color 0.15s, background 0.15s, transform 0.12s;
 }
 
 .select-card:hover {
   border-color: var(--border-2);
   background: var(--surface-2);
+  transform: translateY(-1px);
 }
 
 .select-card.selected {
@@ -249,15 +262,15 @@ input[type="range"] {
 
 /* Layout */
 .page-wrapper {
-  max-width: 560px;
+  max-width: 1040px;
   margin: 0 auto;
-  padding: 40px 24px 80px;
+  padding: 56px 40px 88px;
 }
 
 .grid-wrapper {
-  max-width: 880px;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 32px 24px 80px;
+  padding: 48px 40px 88px;
 }
 
 .form-grid {
@@ -271,11 +284,11 @@ input[type="range"] {
 }
 
 .section + .section {
-  margin-top: 20px;
+  margin-top: 24px;
 }
 
 .field + .field {
-  margin-top: 14px;
+  margin-top: 16px;
 }
 
 /* Segmented control */
@@ -377,7 +390,7 @@ input[type="range"] {
 .dish-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--r-lg);
+  border-radius: var(--r-xl);
   cursor: pointer;
   transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
   overflow: hidden;
@@ -396,18 +409,18 @@ input[type="range"] {
   background: rgba(17, 17, 16, 0.5);
   backdrop-filter: blur(4px);
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   z-index: 200;
+  padding: 24px;
 }
 
 .modal-panel {
   background: var(--surface);
-  border-radius: 16px 16px 0 0;
+  border-radius: 16px;
   border: 1px solid var(--border);
-  border-bottom: none;
   width: 100%;
-  max-width: 560px;
+  max-width: 960px;
   max-height: 85vh;
   overflow-y: auto;
   padding: 24px;
@@ -415,12 +428,12 @@ input[type="range"] {
 
 /* Navigation */
 nav {
-  height: 48px;
+  height: 64px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
-  background: rgba(247, 247, 245, 0.92);
+  padding: 0 32px;
+  background: rgba(252, 252, 250, 0.88);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border);
   position: sticky;
@@ -430,7 +443,7 @@ nav {
 
 .logo {
   font-family: var(--font-family);
-  font-size: 17px;
+  font-size: 22px;
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.2px;
@@ -477,4 +490,73 @@ nav {
   height: 2px;
   background: var(--accent);
   transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (max-width: 1024px) {
+  .page-wrapper {
+    max-width: 860px;
+    padding: 44px 28px 80px;
+  }
+
+  .grid-wrapper {
+    max-width: 960px;
+    padding: 40px 28px 80px;
+  }
+
+  nav {
+    height: 56px;
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  input[type="text"],
+  input[type="number"],
+  select,
+  textarea {
+    height: 36px;
+    font-size: 13px;
+  }
+
+  .card {
+    padding: 18px;
+  }
+
+  .page-wrapper {
+    padding: 32px 20px 72px;
+  }
+
+  .grid-wrapper {
+    padding: 28px 20px 72px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .modal-panel {
+    border-radius: 16px 16px 0 0;
+    border-bottom: none;
+    max-width: 100%;
+  }
+
+  nav {
+    height: 52px;
+    padding: 0 16px;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
 }

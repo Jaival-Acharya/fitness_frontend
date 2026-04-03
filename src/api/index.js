@@ -36,4 +36,40 @@ export const getDishById = (id) =>
 export const getCategories = () =>
   api.get('/categories')
 
+// Meal Plan APIs
+export const suggestMealPlan = (sessionId, fitnessGoal, dietType) =>
+  api.post('/meal-plans/suggest', {
+    session_id: sessionId,
+    fitness_goal: fitnessGoal,
+    diet_type: dietType,
+  })
+
+export const suggestWeekMealPlan = (sessionId, fitnessGoal, dietType, days) =>
+  api.post('/meal-plans/suggest-week', {
+    session_id: sessionId,
+    fitness_goal: fitnessGoal,
+    diet_type: dietType,
+    days: days,
+  })
+
+export const saveMealPlan = (sessionId, breakfastDishId, lunchDishId, dinnerDishId) =>
+  api.post('/meal-plans/save', {
+    session_id: sessionId,
+    breakfast_dish_id: breakfastDishId,
+    lunch_dish_id: lunchDishId,
+    dinner_dish_id: dinnerDishId,
+  })
+
+export const getMealPlan = (sessionId) =>
+  api.get(`/meal-plans/${sessionId}`)
+
+export const exportMealPlanPDF = (sessionId, breakfastDishId = null, lunchDishId = null, dinnerDishId = null) =>
+  api.post(`/meal-plans/${sessionId}/export-pdf`, {
+    breakfast_dish_id: breakfastDishId,
+    lunch_dish_id: lunchDishId,
+    dinner_dish_id: dinnerDishId,
+  }, {
+    responseType: 'blob',
+  })
+
 export default api

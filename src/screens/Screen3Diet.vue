@@ -99,7 +99,7 @@ function goBack() {
 
 .heading-display {
   font-family: var(--font-family);
-  font-size: 28px;
+  font-size: clamp(2rem, 1.65rem + 0.9vw, 2.5rem);
   font-weight: 600;
   color: #111110;
   line-height: 1.3;
@@ -107,28 +107,29 @@ function goBack() {
 }
 
 .body-secondary {
-  font-size: 13px;
+  font-size: 15px;
   color: #6b7280;
-  margin-bottom: 32px;
+  margin-bottom: 36px;
 }
 
 .diet-cards-stack {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 32px;
+  gap: 14px;
+  margin-bottom: 36px;
 }
 
 .select-card-horizontal {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px;
+  padding: 20px;
   border: 1px solid #d1d5db;
-  border-radius: 8px;
+  border-radius: 14px;
   background: #ffffff;
   cursor: pointer;
   transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
 }
 
 .select-card-horizontal:hover {
@@ -159,14 +160,14 @@ function goBack() {
 }
 
 .diet-title {
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
   color: #1f2937;
-  margin-bottom: 3px;
+  margin-bottom: 4px;
 }
 
 .diet-description {
-  font-size: 12px;
+  font-size: 13px;
   color: #6b7280;
   line-height: 1.4;
 }
@@ -194,11 +195,11 @@ function goBack() {
 
 .btn-primary,
 .btn-secondary {
-  height: 34px;
-  font-size: 13px;
+  height: 40px;
+  font-size: 14px;
   font-weight: 500;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -226,6 +227,42 @@ function goBack() {
 .btn-secondary:hover {
   background: #e3e3df;
   transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .body-secondary {
+    font-size: 13px;
+    margin-bottom: 28px;
+  }
+
+  .diet-cards-stack {
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .select-card-horizontal {
+    padding: 14px;
+    border-radius: 10px;
+  }
+
+  .diet-title {
+    font-size: 13px;
+  }
+
+  .diet-description {
+    font-size: 12px;
+  }
+
+  .button-row {
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    height: 36px;
+    font-size: 13px;
+  }
 }
 </style>
 
